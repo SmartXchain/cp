@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Piedmont Aviation - Standards{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">{% if object %}Edit{% else %}Create{% endif %} Standard</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Create{% endif %}</button>
+        <a href="{% url 'standards_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

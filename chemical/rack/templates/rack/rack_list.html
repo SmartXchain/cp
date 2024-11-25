@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Rack List{% endblock %}
+
+{% block content %}
+<!-- rack/templates/rack/rack_list.html -->
+
+
+<div class="container my-5">
+    <h2>Rack List</h2>
+    <a href="{% url 'rack_create' %}" class="btn btn-primary mb-3">Add New Rack</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Rack Number</th>
+                <th>Location</th>
+                <th>Application Type</th>  <!-- New column -->
+                <th>Last Inspection Date</th>
+                <th>Next Inspection Date</th>
+                <th>Condition</th>
+                <th>Inspector</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rack in racks %}
+                <tr class="{% if rack.is_overdue %}table-danger{% endif %}">
+                    <td>{{ rack.rack_number }}</td>
+                    <td>{{ rack.location }}</td>
+                    <td>{{ rack.application_type }}</td>  <!-- New field -->
+                    <td>{{ rack.last_inspection_date }}</td>
+                    <td>{{ rack.next_inspection_date }}</td>
+                    <td>{{ rack.condition }}</td>
+                    <td>{{ rack.inspector }}</td>
+                    <td>
+                        {% if rack.is_overdue %}
+                            <span class="text-danger">Overdue</span>
+                        {% else %}
+                            <span class="text-success">On Schedule</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'rack_detail' rack.pk %}" class="btn btn-outline-secondary btn-sm">View</a>
+                        <a href="{% url 'rack_update' rack.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center">No racks available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Manual Method List{% endblock %}
+
+{% block content %}
+<!-- manual_method/templates/manual_method/manualmethod_list.html -->
+
+<div class="container my-5">
+    <h2>Manual Method List</h2>
+    <a href="{% url 'manualmethod_create' %}" class="btn btn-primary mb-3">Add New Manual Method</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Method Number</th>
+                <th>Process Type</th>
+                <th>Temperature Range</th>
+                <th>Time Immersion</th>
+                <th>Test Required</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for method in manual_methods %}
+                <tr>
+                    <td>{{ method.method_number }}</td>
+                    <td>{{ method.get_process_type_display }}</td>
+                    <td>{{ method.temperature_min }} - {{ method.temperature_max }} °C</td>
+                    <td>{{ method.time_immersion_min }} - {{ method.time_immersion_max }} mins</td>
+                    <td>{{ method.test_required|default:"None" }}</td>
+                    <td>
+                        <a href="{% url 'manualmethod_detail' method.pk %}" class="btn btn-outline-secondary btn-sm">View</a>
+                        <a href="{% url 'manualmethod_update' method.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No manual methods available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

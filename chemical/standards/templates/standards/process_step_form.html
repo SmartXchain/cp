@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Process{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h2>{% if object %}Edit{% else %}Add{% endif %} Process Step</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Create{% endif %}</button>
+
+        <!-- Conditional logic to determine the URL for the Cancel button -->
+        {% if object %}
+            <a href="{% url 'standard_detail' object.standard.pk %}" class="btn btn-secondary">Cancel</a>
+        {% else %}
+            <a href="{% url 'standard_detail' standard_id %}" class="btn btn-secondary">Cancel</a>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}

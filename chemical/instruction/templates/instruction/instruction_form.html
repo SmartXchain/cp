@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Instructions Form{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>{% if object %}Edit{% else %}Create{% endif %} Instruction</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title.label_tag }} {{ form.title }}
+        {{ form.process_category.label_tag }} {{ form.process_category }}
+        {{ form.custom_description.label_tag }} {{ form.custom_description }}
+
+        <!-- Parameters List -->
+        <div class="mb-3">
+            <label for="id_parameters_list" class="form-label">Parameters</label>
+            <ul id="id_parameters_list">
+                {% for parameter in form.get_parameters_list %}
+                    <li>{{ parameter }}</li>
+                {% empty %}
+                    <li>No parameters available for the selected category.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Create{% endif %} Instruction</button>
+        <a href="{% url 'instruction_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- jQuery and Custom JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Listen for changes on the process_category field
+        $('#id_process_category').change(function() {
+            let selectedCategory = $(this).val();
+            if (selectedCategory) {
+                // Send AJAX request to get parameters for the selected category
+                $.ajax({
+                    url: "{% url 'get_parameters' %}",
+                    data: { 'category': selectedCategory },
+                    dataType: 'json',
+                    success: function(data) {
+                        let parameterList = $('#id_parameters_list');
+                        parameterList.empty();
+                        if (data.parameters.length > 0) {
+                            // Populate list with parameters
+                            data.parameters.forEach(function(item) {
+                                parameterList.append('<li>' + item + '</li>');
+                            });
+                        } else {
+                            parameterList.append('<li>No parameters available for this category.</li>');
+                        }
+                    }
+                });
+            } else {
+                $('#id_parameters_list').empty().append('<li>No parameters available for this category.</li>');
+            }
+        });
+    });
+</script>
+
+{% endblock %}

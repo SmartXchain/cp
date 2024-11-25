@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Manual Method Details{% endblock %}
+
+{% block content %}
+<!-- manual_method/templates/manual_method/manualmethod_detail.html -->
+
+<div class="container my-5">
+    <h2>Details for Manual Method {{ method.method_number }}</h2>
+    <p><strong>Process Type:</strong> {{ method.get_process_type_display }}</p>
+    <p><strong>Temperature Range:</strong> {{ method.temperature_min }} - {{ method.temperature_max }} °C</p>
+    <p><strong>Time Required:</strong> {{ method.time_required_min }} - {{ method.time_required_max }} minutes</p>
+    <p><strong>Test Required:</strong> {{ method.test_required|default:"None" }}</p>
+    <p><strong>Description:</strong> {{ method.description }}</p>
+
+    <a href="{% url 'manualmethod_update' method.pk %}" class="btn btn-outline-primary">Edit Method</a>
+    <a href="{% url 'manualmethod_list' %}" class="btn btn-secondary">Back to Method List</a>
+</div>
+{% endblock %}

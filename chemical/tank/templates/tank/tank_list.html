@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Tank List{% endblock %}
+
+{% block content %}
+<!-- tank/templates/tank/tank_list.html -->
+
+<div class="container my-5">
+    <h2>Tank List</h2>
+    <a href="{% url 'tank_create' %}" class="btn btn-primary mb-3">Add New Tank</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tank Number</th>
+                <th>Process Description</th>
+                <th>Temperature Range</th>
+                <th>Uses Rectifier</th>
+                <th>Test Required</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tank in tanks %}
+                <tr>
+                    <td>{{ tank.tank_number }}</td>
+                    <td>{{ tank.get_process_description_display }}</td>
+                    <td>{{ tank.temperature_min }} - {{ tank.temperature_max }} °C</td>
+                    <td>{{ tank.uses_rectifier|yesno:"Yes,No" }}</td>
+                    <td>{{ tank.test_required|default:"None" }}</td>
+                    <td>
+                        <a href="{% url 'tank_detail' tank.pk %}" class="btn btn-outline-secondary btn-sm">View</a>
+                        <a href="{% url 'tank_update' tank.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No tanks available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

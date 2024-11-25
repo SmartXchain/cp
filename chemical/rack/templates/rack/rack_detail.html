@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Racks Details{% endblock %}
+
+{% block content %}
+<!-- rack/templates/rack/rack_detail.html -->
+
+
+<div class="container my-5">
+    <h2>Rack Details for {{ rack.rack_number }}</h2>
+    <p><strong>Location:</strong> {{ rack.location }}</p>
+    <p><strong>Application Type:</strong> {{ rack.application_type }}</p>  <!-- New field -->
+    <p><strong>Last Inspection Date:</strong> {{ rack.last_inspection_date }}</p>
+    <p><strong>Next Inspection Date:</strong> {{ rack.next_inspection_date }}</p>
+    <p><strong>Inspection Frequency:</strong> {{ rack.inspection_frequency }}</p>
+    <p><strong>Condition:</strong> {{ rack.condition }}</p>
+    <p><strong>Inspector:</strong> {{ rack.inspector }}</p>
+    <p><strong>Notes:</strong> {{ rack.notes }}</p>
+
+    {% if rack.photo %}
+        <p><strong>Photo:</strong><br><img src="{{ rack.photo.url }}" alt="Rack Photo" style="max-width: 300px;"></p>
+    {% endif %}
+
+    <h3 class="mt-4">Inspection History</h3>
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>Inspection Date</th>
+                <th>Inspector</th>
+                <th>Condition</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inspection in inspections %}
+                <tr>
+                    <td>{{ inspection.inspection_date }}</td>
+                    <td>{{ inspection.inspector }}</td>
+                    <td>{{ inspection.condition }}</td>
+                    <td>{{ inspection.notes }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No inspection history available for this rack.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'add_inspection' rack.pk %}" class="btn btn-primary my-3">Add Inspection</a>
+    <a href="{% url 'rack_update' rack.pk %}" class="btn btn-outline-primary">Edit Rack</a>
+    <a href="{% url 'rack_list' %}" class="btn btn-secondary">Back to Rack List</a>
+</div>
+{% endblock %}

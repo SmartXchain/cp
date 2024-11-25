@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Customer Details{% endblock %}
+
+{% block content %}
+<!-- customer/templates/customer/customer_detail.html -->
+
+<div class="container my-5">
+    <h2>{{ customer.name }}</h2>
+    <p><strong>Description:</strong> {{ customer.description }}</p>
+    {% if customer.website %}
+        <p><strong>Website:</strong> <a href="{{ customer.website }}" target="_blank">{{ customer.website }}</a></p>
+    {% endif %}
+    <a href="{% url 'customer_list' %}" class="btn btn-secondary">Back to Customer List</a>
+    <a href="{% url 'customer_update' customer.pk %}" class="btn btn-outline-primary">Edit Customer</a>
+</div>
+
+
+
+{% endblock %}

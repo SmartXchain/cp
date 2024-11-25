@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Piedmont Aviation - Standards{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Standards</h2>
+    <a href="{% url 'standard_create' %}" class="btn btn-primary mb-3">Add New Standard</a>
+    
+    {% for standard in standards %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ standard.name }}</h5>
+                <p class="card-text"><strong>Description:</strong> {{ standard.description }}</p>
+                <p><strong>Revision:</strong> {{ standard.revision }} | <strong>Author:</strong> {{ standard.author }}</p>
+                <p><strong>Class:</strong> {{ standard.class_field }} | <strong>Type:</strong> {{ standard.type }}</p>
+                <a href="{% url 'standard_detail' standard.pk %}" class="btn btn-outline-secondary">View Details</a>
+                <a href="{% url 'standard_update' standard.pk %}" class="btn btn-outline-primary">Edit</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

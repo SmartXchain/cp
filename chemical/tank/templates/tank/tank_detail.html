@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Tank Details{% endblock %}
+
+{% block content %}
+<!-- tank/templates/tank/tank_detail.html -->
+
+<div class="container my-5">
+    <h2>Tank Details for {{ tank.tank_number }}</h2>
+    <p><strong>Components Makeup:</strong> {{ tank.components_makeup }}</p>
+    <p><strong>Temperature Range:</strong> {{ tank.temperature_min }} - {{ tank.temperature_max }} °C</p>
+    <p><strong>Uses Rectifier:</strong> {{ tank.uses_rectifier|yesno:"Yes,No" }}</p>
+    <p><strong>Rectifier Number:</strong> {{ tank.rectifier_number|default:"N/A" }}</p>
+    <p><strong>Time Immersion:</strong> {{ tank.time_immersion_min }} - {{ tank.time_immersion_max }} minutes</p>
+    <p><strong>Test Required:</strong> {{ tank.test_required|default:"None" }}</p>
+    <p><strong>Process Description:</strong> {{ tank.get_process_description_display }}</p>
+
+    <a href="{% url 'tank_update' tank.pk %}" class="btn btn-outline-primary">Edit Tank</a>
+    <a href="{% url 'tank_list' %}" class="btn btn-secondary">Back to Tank List</a>
+</div>
+
+{% endblock %}

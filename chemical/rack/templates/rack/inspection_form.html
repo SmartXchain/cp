@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Rack Inspection{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h2>{% if object %}Edit{% else %}Add{% endif %} Inspection for Rack {{ rack.rack_number }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_inspection_date" class="form-label">Inspection Date</label>
+            {{ form.inspection_date }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_inspector" class="form-label">Inspector</label>
+            {{ form.inspector }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_condition" class="form-label">Condition</label>
+            {{ form.condition }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_notes" class="form-label">Notes</label>
+            {{ form.notes }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Add{% endif %} Inspection</button>
+        <a href="{% url 'rack_detail' rack.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

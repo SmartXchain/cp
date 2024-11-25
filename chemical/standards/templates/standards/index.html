@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Piedmont Aviation - Standards{% endblock %}
+
+{% block content %}
+
+<!-- Standards Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Standards</h2>
+    
+    <!-- Standard 1 Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Standard Name: Chrome Plating Quality Standard</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Description:</strong> This standard defines the quality requirements for chrome plating on industrial components.</p>
+            <p><strong>Revision:</strong> Rev. 3</p>
+            <p><strong>Author:</strong> John Doe</p>
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#inspections1" aria-expanded="false" aria-controls="inspections1">
+                View Lot Inspections
+            </button>
+
+            <!-- Lot Inspections Collapse -->
+            <div class="collapse mt-3" id="inspections1">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Inspection Name:</strong> Thickness Measurement<br>
+                        <strong>Description of Acceptance:</strong> Thickness must be within 5-10 microns.<br>
+                        <strong>Paragraph Section:</strong> Sec 4.2.3<br>
+                        <strong>Sampling Plan:</strong> Based on Class A, Type 1.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Inspection Name:</strong> Adhesion Test<br>
+                        <strong>Description of Acceptance:</strong> No peeling or flaking under standard adhesive test.<br>
+                        <strong>Paragraph Section:</strong> Sec 5.1.4<br>
+                        <strong>Sampling Plan:</strong> Class B, Type 2.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Repeat this card structure for each standard -->
+    
+    <!-- Standard 2 Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Standard Name: Nickel Plating Durability Standard</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Description:</strong> Specifications for nickel plating quality and adherence for electronic components.</p>
+            <p><strong>Revision:</strong> Rev. 2</p>
+            <p><strong>Author:</strong> Jane Smith</p>
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#inspections2" aria-expanded="false" aria-controls="inspections2">
+                View Lot Inspections
+            </button>
+
+            <!-- Lot Inspections Collapse -->
+            <div class="collapse mt-3" id="inspections2">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Inspection Name:</strong> Corrosion Resistance Test<br>
+                        <strong>Description of Acceptance:</strong> No corrosion after 48 hours in salt spray.<br>
+                        <strong>Paragraph Section:</strong> Sec 3.5.6<br>
+                        <strong>Sampling Plan:</strong> Class C, Type 1.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Inspection Name:</strong> Surface Finish Test<br>
+                        <strong>Description of Acceptance:</strong> Surface should have a mirror finish without imperfections.<br>
+                        <strong>Paragraph Section:</strong> Sec 6.2.1<br>
+                        <strong>Sampling Plan:</strong> Class A, Type 1.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
