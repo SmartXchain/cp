@@ -3,81 +3,10 @@
 {% block title %}Piedmont Aviation - Standards{% endblock %}
 
 {% block content %}
-<style>
-    /* Style for collapsible containers */
-    .collapsible-container {
-        overflow: hidden;
-        max-height: 40px;  /* Default collapsed height */
-        transition: max-height 0.3s ease;
-        cursor: pointer;
-    }
-    .collapsible-container:hover {
-        max-height: 1000px;  /* Expand on hover */
-    }
-</style>
-<div class="container my-5">
-<h2>{{ standard.name }}</h2>
-<p><strong>Description:</strong> {{ standard.description }}</p>
-<p><strong>Revision:</strong> {{ standard.revision }}</p>
-<p><strong>Author:</strong> {{ standard.author }}</p>
-
-<hr>
-
-<!-- Collapsible Lot Inspection Section with Edit Button -->
-<h3>Lot Inspections</h3>
-<a href="{% url 'inspection_create' standard.pk %}" class="btn btn-primary mb-3">Add Inspection</a>
-<div class="collapsible-container">
-    <ul class="list-group">
-        {% for inspection in standard.inspections.all %}
-            <li class="list-group-item">
-                <strong>Inspection Name:</strong> {{ inspection.name }}<br>
-                <strong>Description of Acceptance:</strong> {{ inspection.acceptance_criteria }}<br>
-                <strong>Paragraph Section:</strong> {{ inspection.paragraph_section }}<br>
-                <strong>Sampling Plan:</strong> {{ inspection.sampling_plan }}
-                <div class="mt-2">
-                    <a href="{% url 'inspection_update' inspection.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
-                </div>
-            </li>
-        {% empty %}
-            <li class="list-group-item">No inspections available.</li>
-        {% endfor %}
-    </ul>
-</div>
-
-<hr>
-
-<!-- Collapsible Process Steps Section -->
-<h3>Process Steps</h3>
-<a href="{% url 'process_step_create' standard.pk %}" class="btn btn-primary mb-3">Add Process Step</a>
-<div class="collapsible-container">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Step Number</th>
-                <th>Instructions</th>
-                <th>Operator</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for step in standard.process_steps.all %}
-                <tr>
-                    <td>{{ step.step_number }}</td>
-                    <td>{{ step.instructions }}</td>
-                    <td>{{ step.operator }}</td>
-                    <td>{{ step.date }}</td>
-                    <td>
-                        <a href="{% url 'process_step_update' step.pk %}" class="btn btn-outline-secondary">Edit</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center">No process steps available.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-</div>
+<h2>{{ item.name }}</h2>
+<p>{{ item.description }}</p>
+<p>
+    <a href="{{ item.standard_file.url }}">Download File</a>
+</p>
+<a href="{% url 'standard_list' %}">Back to List</a>
 {% endblock %}

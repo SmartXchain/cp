@@ -1,12 +1,7 @@
-# standards/forms.py
 from django import forms
-from .models import ProcessStep
-from instruction.models import Instruction
+from .models import Standard
 
-
-class ProcessStepForm(forms.ModelForm):
-    instruction = forms.ModelChoiceField(queryset=Instruction.objects.all(), required=True)
-
+class StandardForm(forms.ModelForm):
     class Meta:
-        model = ProcessStep
-        fields = ['step_number', 'instruction', 'operator', 'date']
+        model = Standard
+        fields = ['name', 'description', 'revision', 'author', 'standard_file']
