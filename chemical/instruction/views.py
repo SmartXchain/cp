@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from .models import CATEGORY_PARAMETERS
 
+
 def get_parameters(request):
     category = request.GET.get('category')
     parameters = CATEGORY_PARAMETERS.get(category, "").split(', ')  # Return as list
@@ -26,6 +27,7 @@ class InstructionCreateView(CreateView):
     form_class = InstructionForm
     template_name = 'instruction/instruction_form.html'
     success_url = reverse_lazy('instruction_list')
+
 
 class InstructionUpdateView(UpdateView):
     model = Instruction

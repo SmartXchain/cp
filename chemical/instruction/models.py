@@ -1,6 +1,8 @@
 # instruction/models.py
 
+
 from django.db import models
+
 
 class ProcessCategory(models.TextChoices):
     MASKING = 'Masking', 'Masking'
@@ -8,6 +10,7 @@ class ProcessCategory(models.TextChoices):
     ELECTROPLATING = 'Electroplating', 'Electroplating'
     ANODIZING = 'Anodizing', 'Anodizing'
     # Additional categories as needed
+
 
 # Define a dictionary of default parameters for each category
 CATEGORY_PARAMETERS = {
@@ -18,15 +21,16 @@ CATEGORY_PARAMETERS = {
     # Continue with other categories and their parameters
 }
 
+
 class Instruction(models.Model):
     title = models.CharField(max_length=200)
-    
+
     process_category = models.CharField(
         max_length=50,
         choices=ProcessCategory.choices,
         help_text="Select the process category"
     )
-    
+
     parameters = models.TextField(blank=True, help_text="Recordable items/parameters for this instruction")
     custom_description = models.TextField(blank=True, null=True, help_text="Additional custom instructions")
 
@@ -38,4 +42,3 @@ class Instruction(models.Model):
         if self.process_category and not self.parameters:
             self.parameters = CATEGORY_PARAMETERS.get(self.process_category, "")
         super().save(*args, **kwargs)
-

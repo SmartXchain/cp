@@ -1,7 +1,9 @@
 # instruction/urls.py
 
+
 from django.urls import path
-from .views import InstructionListView, InstructionCreateView,InstructionUpdateView, get_parameters
+from .views import InstructionListView, InstructionCreateView, InstructionUpdateView, get_parameters
+
 
 urlpatterns = [
     path('', InstructionListView.as_view(), name='instruction_list'),

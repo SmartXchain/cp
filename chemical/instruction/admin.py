@@ -1,7 +1,9 @@
 # instruction/admin.py
 
+
 from django.contrib import admin
 from .models import Instruction
+
 
 @admin.register(Instruction)
 class InstructionAdmin(admin.ModelAdmin):

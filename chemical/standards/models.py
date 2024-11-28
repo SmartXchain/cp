@@ -12,7 +12,6 @@ class Standard(models.Model):
     class_field = models.CharField(max_length=50, default="I")  # Use `class_field` to avoid conflict with Python's `class`
     type = models.CharField(max_length=50)
     process = models.TextField()  # Instructions for processing a part
-
     def __str__(self):
         return self.name
 
